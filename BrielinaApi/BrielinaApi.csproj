@@ -201,7 +201,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <Content Include="Dados\FSA.db-journal" />
-    <EmbeddedResource Include="Dados\FSA_Produção.db">
+    <EmbeddedResource Include="Dados\FSA_Producao.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
