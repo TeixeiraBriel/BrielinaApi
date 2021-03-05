@@ -45,12 +45,14 @@ namespace AnimesController
                             "Generos," +
                             "Completo," +
                             "Link," +
+                            "LinkImage," +
                             "DiaLancamento) values (" +
                             "@Nome," +
                             "@Episodios," +
                             "@Generos," +
                             "@Completo," +
                             "@Link," +
+                            "@LinkImage," +
                             "@DiaLancamento" +
                             ")"
                             , anime);
@@ -69,6 +71,7 @@ namespace AnimesController
                     "Generos = @Generos," +
                     "Completo = @Completo," +
                     "Link = @Link," +
+                    "LinkImage = @LinkImage," +
                     "DiaLancamento = @DiaLancamento" +
                     " WHERE Id='" + id + "'", anime);
             }
