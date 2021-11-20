@@ -23,5 +23,6 @@ namespace Infraestrutura.Entidades
         public string LinkImage { get; set; }
 
         public string DiaLancamento { get; set; }
+        public int Finalizada { get; set; }
     }
 }

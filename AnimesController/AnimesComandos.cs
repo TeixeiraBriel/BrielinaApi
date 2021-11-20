@@ -38,7 +38,7 @@ namespace AnimesController
             using (IDbConnection cnn = new SQLiteConnection(connectionString.carregarConnectionString(), true))
             {
                 var saida = cnn.Query<int>("select Id from Animes order by Id desc  LIMIT 1", new DynamicParameters()).FirstOrDefault();
-                anime.Id = saida + 1;
+                anime.Id = 
                 cnn.Execute("insert into Animes" +
                             "(Nome," +
                             "Episodios," +
@@ -46,6 +46,7 @@ namespace AnimesController
                             "Completo," +
                             "Link," +
                             "LinkImage," +
+                            "Finalizada," +
                             "DiaLancamento) values (" +
                             "@Nome," +
                             "@Episodios," +
@@ -53,11 +54,12 @@ namespace AnimesController
                             "@Completo," +
                             "@Link," +
                             "@LinkImage," +
+                            "@Finalizada," +
                             "@DiaLancamento" +
                             ")"
                             , anime);
 
-                return "Gerado com o ID: " + anime.Id;
+                return "Gerado com o ID: " + saida + 1;
             }
         }
 
@@ -72,7 +74,8 @@ namespace AnimesController
                     "Completo = @Completo," +
                     "Link = @Link," +
                     "LinkImage = @LinkImage," +
-                    "DiaLancamento = @DiaLancamento" +
+                    "DiaLancamento = @DiaLancamento," +
+                    "Finalizada = @Finalizada" +
                     " WHERE Id='" + id + "'", anime);
             }
 
