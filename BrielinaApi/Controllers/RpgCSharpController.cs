@@ -36,7 +36,7 @@ namespace BrielinaApi.Controllers
 
         [HttpPut]
         [Route("api/RpgCSharp/{id}")]
-        public Registro Put(string id, [FromBody] FragmentoRpg value)
+        public FragmentoRpg Put(string id, [FromBody] FragmentoRpg value)
         {
             return FragmentoRpg.modificarRegistro(value, id);
 

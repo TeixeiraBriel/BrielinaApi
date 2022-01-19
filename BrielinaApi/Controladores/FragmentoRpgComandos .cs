@@ -56,9 +56,11 @@ namespace BrielinaApi.Controladores
                 cnn.Execute("UPDATE Fragmentos " +
                     "SET TituloFragmento = @TituloFragmento," +
                     "TextoFragmento = @TextoFragmento," +
+                    "IdFragmentoParent = @IdFragmentoParent" +
                     " WHERE IdFragmentoHistoria='" + id + "'", registro);
             }
 
+            registro.IdFragmentoHistoria = int.Parse(id);
             return registro;
         }
 
