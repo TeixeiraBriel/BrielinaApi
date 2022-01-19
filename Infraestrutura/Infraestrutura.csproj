@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="ConnectionString.cs" />
     <Compile Include="Entidades\Anime.cs" />
+    <Compile Include="Entidades\FragmentoRpg.cs" />
     <Compile Include="Entidades\Registro.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

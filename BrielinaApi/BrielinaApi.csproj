@@ -164,7 +164,9 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controladores\AnimesComandos.cs" />
+    <Compile Include="Controladores\FragmentoRpgComandos .cs" />
     <Compile Include="Controladores\FinanceiroComandos.cs" />
+    <Compile Include="Controllers\RpgCSharpController.cs" />
     <Compile Include="Controllers\FinanceiroController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AnimesController.cs" />
@@ -213,6 +215,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Dados\FinanceiroDB_Producao.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dados\RpgCSharpDB.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dados\RpgCSharpDB_Producao.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
