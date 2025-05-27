@@ -1,9 +1,11 @@
 ﻿using Dominio.Configuration;
 using Dominio.Interfaces;
+using Infraestrutura.Repositorio;
 using Infraestrutura.Servico;
 using InjecaoDependencia.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace InjecaoDependencia
 {
@@ -16,14 +18,10 @@ namespace InjecaoDependencia
 
             //Services
             services.AddScoped<IWeatherForecastService, WeatherForecastService>();
-            //services.AddScoped<ILogger<string>, Logger<string>>();
-            //services.AddScoped<IExecutor, Executor>();
+            services.AddScoped<ILogger<string>, Logger<string>>();
 
             ////Repositories
-            //services.AddScoped<ISerafinsHubRepositorio, SerafinsHubRepositorio>();
-            //services.AddScoped<IAulaRepositorio, AulaRepositorio>();
-            //services.AddScoped<INarrativaRepositorio, NarrativaRepositorio>();
-            //services.AddScoped<ISessaoRepositorio, SessaoRepositorio>();
+            services.AddScoped<INarrativaRepositorio, NarrativaRepositorio>();
         }
     }
 }
