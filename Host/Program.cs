@@ -16,16 +16,20 @@ _ = new Bootstrapper(services, configuration);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+if (app.Environment.IsDevelopment() && app.Configuration["ASPNETCORE_HTTPS_PORT"] != null)
+{
+    app.UseHttpsRedirection();
+}
 
 app.UseAuthorization();
 
 app.MapControllers();
 
+app.MapGet("/", () => "API Brielina rodando!");
 app.Run();

@@ -1,17 +1,22 @@
-# Runtime
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-WORKDIR /app
-EXPOSE 80
-
-# Build
+# Etapa de build
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY . .
-RUN dotnet restore
-RUN dotnet publish -c Release -o /app/publish
 
-# Final
-FROM base AS final
+# Copia tudo
+COPY . .
+
+# Restaura pacotes do projeto principal
+RUN dotnet restore Host/Host.csproj
+
+# Publica o projeto principal
+RUN dotnet publish Host/Host.csproj -c Release -o /app/publish --no-restore
+
+# Etapa de runtime
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
+
+# Copia arquivos publicados da etapa anterior
 COPY --from=build /app/publish .
-ENTRYPOINT ["dotnet", "BrielinaAPI.dll"]
+
+# Define o ponto de entrada correto
+ENTRYPOINT ["dotnet", "Host.dll"]
