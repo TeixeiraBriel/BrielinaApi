@@ -9,5 +9,7 @@ namespace Dominio.Configuration
     public class AppSettings
     {
         public string Version { get; set; }
+        public string JwtKey { get; set; }
+        public string JwtIssuer { get; set; }
     }
 }

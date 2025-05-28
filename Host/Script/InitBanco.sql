@@ -8,3 +8,8 @@ CREATE TABLE narrativas (
     Ramificacoes TEXT,
     Tipo INT DEFAULT 0
 );
+CREATE TABLE usuarios (
+    Id INT AUTO_INCREMENT PRIMARY KEY,
+    Usuario VARCHAR(255) NOT NULL DEFAULT '',
+    SenhaHash VARCHAR(255) NOT NULL DEFAULT ''
+);
