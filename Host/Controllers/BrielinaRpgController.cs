@@ -81,6 +81,7 @@ namespace Host.Controllers
                     Texto = newNarrativa.Texto != null ? newNarrativa.Texto : "",
                     Ramificacoes = newNarrativa.Ramificacoes != null ? newNarrativa.Ramificacoes : "",
                     Tipo = newNarrativa.Tipo != 0 ? newNarrativa.Tipo : 1,
+                    Autor = newNarrativa.Autor != null ? newNarrativa.Autor : "",
                 };
 
                 await _narrativaRepositorio.CriarNarrativa(_narrativa);
