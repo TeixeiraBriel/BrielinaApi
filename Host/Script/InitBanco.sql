@@ -13,3 +13,6 @@ CREATE TABLE usuarios (
     Usuario VARCHAR(255) NOT NULL DEFAULT '',
     SenhaHash VARCHAR(255) NOT NULL DEFAULT ''
 );
+
+ALTER TABLE narrativas
+add Autor VARCHAR(1000) DEFAULT '';

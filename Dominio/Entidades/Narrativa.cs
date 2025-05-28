@@ -14,5 +14,6 @@ namespace Dominio.Entidades
         public string Texto { get; set; }
         public string Ramificacoes { get; set; }
         public int Tipo { get; set; }
+        public string Autor { get; set; }
     }
 }
