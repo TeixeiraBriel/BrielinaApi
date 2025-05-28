@@ -17,7 +17,11 @@ namespace Infraestrutura.EntityFramework
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+#if(!DEBUG)
+            string connetionString = Environment.GetEnvironmentVariable("DB_CONNECTION");
+#else
             string connetionString = _configuration.GetConnectionString("DefaultConnection");
+#endif
 
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseMySql(connetionString, ServerVersion.AutoDetect(connetionString));

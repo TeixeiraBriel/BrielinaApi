@@ -31,5 +31,5 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.MapGet("/", () => "API Brielina rodando!");
+//app.MapGet("/", () => "API Brielina rodando!");
 app.Run();
