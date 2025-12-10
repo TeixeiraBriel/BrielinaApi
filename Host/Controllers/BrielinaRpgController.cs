@@ -55,8 +55,8 @@ namespace Host.Controllers
             }
         }
 
-        [HttpPost, Route("{id}")]
-        public async Task<IActionResult> BuscaAulaPorId([FromBody] int Id)
+        [HttpPost, Route("BuscaNarrativaPorId/{id}")]
+        public async Task<IActionResult> BuscaNarrativaPorId([FromBody] int Id)
         {
             try
             {
@@ -99,6 +99,20 @@ namespace Host.Controllers
             try
             {
                 await _narrativaRepositorio.DeleteNarrativa(Id);
+                return StatusCode(200, "Sucesso");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPut, Route("{Id}")]
+        public async Task<IActionResult> AtualizaNarrativa([FromBody] Narrativa newNarrativa)
+        {
+            try
+            {
+                await _narrativaRepositorio.EditNarrativa(newNarrativa);
                 return StatusCode(200, "Sucesso");
             }
             catch (Exception ex)

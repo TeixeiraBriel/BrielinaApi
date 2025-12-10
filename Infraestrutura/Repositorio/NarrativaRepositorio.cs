@@ -54,5 +54,20 @@ namespace Infraestrutura.Repositorio
                 var teste = await _context.SaveChangesAsync();
             }
         }
+
+        public async Task EditNarrativa(Narrativa narrativaAtualizada)
+        {
+            using (Context _context = ContextFactory.OpenContext(_configuration))
+            {
+                Narrativa existente = await _context.Narrativas
+                    .FirstOrDefaultAsync(x => x.IdNarrativas == narrativaAtualizada.IdNarrativas);
+
+                if (existente == null)
+                    throw new Exception("Narrativa não encontrada");
+
+                _context.Entry(existente).CurrentValues.SetValues(narrativaAtualizada);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

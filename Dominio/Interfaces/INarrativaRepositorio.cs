@@ -9,5 +9,6 @@ namespace Dominio.Interfaces
         Task<Narrativa> ObterNarrativaPorId(int Id);
         Task CriarNarrativa(Narrativa newNarrativa);
         Task DeleteNarrativa(int Id);
+        Task EditNarrativa(Narrativa narrativaAtualizada);
     }
 }
