@@ -36,9 +36,13 @@ namespace Infraestrutura.EntityFramework
 
             modelBuilder.ApplyConfiguration(new NarrativaMapping());
             modelBuilder.ApplyConfiguration(new UsuarioMapping());
+            modelBuilder.ApplyConfiguration(new TemaMapping());
+            modelBuilder.ApplyConfiguration(new ComentarioMapping());
         }
 
         public DbSet<Narrativa> Narrativas { get; set; }
         public DbSet<UsuarioModel> Usuarios { get; set; }
+        public DbSet<ComentarioModel> Comentarios { get; set; }
+        public DbSet<TemaModel> Temas { get; set; }
     }
 }

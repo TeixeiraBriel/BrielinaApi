@@ -18,7 +18,16 @@ namespace Infraestrutura.Repositorio
         {
             using (Context _context = ContextFactory.OpenContext(_configuration))
             {
-                return await _context.Usuarios.FirstOrDefaultAsync(u => u.Usuario == user);
+                var result =  await _context.Usuarios.FirstOrDefaultAsync(u => u.Usuario == user);
+                return result;
+            }
+        }
+
+        public async Task<UsuarioModel> ObterPorEmail(string email)
+        {
+            using (Context _context = ContextFactory.OpenContext(_configuration))
+            {
+                return await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == email);
             }
         }
 

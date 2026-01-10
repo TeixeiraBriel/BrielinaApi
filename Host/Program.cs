@@ -1,5 +1,7 @@
 using InjecaoDependencia;
-using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -9,6 +11,23 @@ var configuration = builder.Configuration;
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// ? ADICIONAR JWT AQUI
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(configuration["AppSettings:JwtKey"])),  // ? sua chave
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ClockSkew = TimeSpan.Zero
+        };
+    });
+
+builder.Services.AddAuthorization();  // ? ADICIONAR
 
 //Dependency Injection
 _ = new Bootstrapper(services, configuration);
@@ -43,6 +62,8 @@ if (app.Environment.IsDevelopment() && app.Configuration["ASPNETCORE_HTTPS_PORT"
 
 app.UseCors(MyAllowSpecificOrigins);
 
+// ? ORDEM CRÍTICA
+app.UseAuthentication();     // ? ADICIONAR ANTES DE Authorization
 app.UseAuthorization();
 
 app.MapControllers();
