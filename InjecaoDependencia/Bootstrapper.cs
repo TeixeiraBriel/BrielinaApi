@@ -23,6 +23,8 @@ namespace InjecaoDependencia
             ////Repositories
             services.AddScoped<INarrativaRepositorio, NarrativaRepositorio>();
             services.AddScoped<IUsuariosRepositorio, UsuariosRepositorio>();
+            services.AddScoped<ITemaRepositorio, TemaRepositorio>();
+            services.AddScoped<IComentariosRepositorio, ComentariosRepositorio>();
         }
     }
 }

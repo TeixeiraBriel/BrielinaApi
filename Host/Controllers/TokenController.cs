@@ -34,16 +34,35 @@ namespace Host.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] LoginDTO dto)
+        public async Task<IActionResult> Register([FromBody] RegistroUsuarioDTO dto)
         {
+            // validação básica
+            if (string.IsNullOrWhiteSpace(dto.Usuario) ||
+                string.IsNullOrWhiteSpace(dto.Email) ||
+                string.IsNullOrWhiteSpace(dto.Senha))
+            {
+                return BadRequest("Usuário, e-mail e senha são obrigatórios.");
+            }
+
+            // verifica duplicidade de usuário
             var existingUser = await _usuariosRepositorio.ObterUsuario(dto.Usuario);
             if (existingUser != null)
                 return BadRequest("Usuário já existe.");
 
+            // verifica duplicidade de e-mail (precisa de método no repositório)
+            var existingByEmail = await _usuariosRepositorio.ObterPorEmail(dto.Email);
+            if (existingByEmail != null)
+                return BadRequest("E-mail já está em uso.");
+
             var user = new UsuarioModel
             {
-                Usuario = dto.Usuario,
-                SenhaHash = BCrypt.Net.BCrypt.HashPassword(dto.Senha)
+                Usuario = dto.Usuario.Trim(),
+                Nome = dto.Nome?.Trim(),
+                Email = dto.Email.Trim(),
+                SenhaHash = BCrypt.Net.BCrypt.HashPassword(dto.Senha),
+                Perfil = "aluno",
+                Ativo = true,
+                CriadoEm = DateTime.UtcNow
             };
 
             await _usuariosRepositorio.RegistrarUsuario(user);
@@ -55,16 +74,26 @@ namespace Host.Controllers
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.JwtKey);
+
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()),  // ← ID NUMÉRICO
+                new Claim(ClaimTypes.Name, usuario.Usuario),
+                new Claim(ClaimTypes.Role, usuario.Perfil ?? "aluno")
+            };
+
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[] {
-                    new Claim(ClaimTypes.Name, usuario.Usuario)
-                }),
+                Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.AddHours(2),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(
+                    new SymmetricSecurityKey(key),
+                    SecurityAlgorithms.HmacSha256Signature)
             };
+
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
         }
+
     }
 }
