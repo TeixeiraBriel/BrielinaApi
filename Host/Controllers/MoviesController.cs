@@ -10,7 +10,7 @@ namespace Host.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    //[Authorize]
+    [Authorize]
     public class MoviesController : ControllerBase
     {
         private readonly IMovieRepositorio _movieRepo;
