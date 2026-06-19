@@ -59,3 +59,14 @@ CREATE TABLE tema_comentario (
     CONSTRAINT fk_tema_comentario_usuario
         FOREIGN KEY (usuario_id) REFERENCES usuarios (id)
 );
+
+CREATE TABLE movie (
+  id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(250) NOT NULL,
+  genre VARCHAR(100) NOT NULL,
+  release_year INT NOT NULL,
+  rating DOUBLE NOT NULL,
+  poster_url VARCHAR(500),
+  directed_by VARCHAR(200),
+  sinopse TEXT
+);
