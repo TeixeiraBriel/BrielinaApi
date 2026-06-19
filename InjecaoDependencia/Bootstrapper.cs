@@ -26,6 +26,7 @@ namespace InjecaoDependencia
             services.AddScoped<ITemaRepositorio, TemaRepositorio>();
             services.AddScoped<IComentariosRepositorio, ComentariosRepositorio>();
             services.AddScoped<IMovieRepositorio, MovieRepositorio>();
+            services.AddScoped<IMovieReviewRepositorio, MovieReviewRepositorio>();
         }
     }
 }

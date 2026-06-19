@@ -70,3 +70,23 @@ CREATE TABLE movie (
   directed_by VARCHAR(200),
   sinopse TEXT
 );
+
+CREATE TABLE movie_reviews (
+  id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  movie_id BIGINT UNSIGNED NOT NULL,
+  usuario_id INT NOT NULL,
+  rating DECIMAL(3,1) NOT NULL,
+  review VARCHAR(300) NOT NULL,
+  recommended BOOLEAN NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+  CONSTRAINT fk_movie_reviews_movie
+    FOREIGN KEY (movie_id) REFERENCES movie(id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+
+  CONSTRAINT fk_movie_reviews_usuario
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(Id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);

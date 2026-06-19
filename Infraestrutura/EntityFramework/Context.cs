@@ -38,6 +38,7 @@ namespace Infraestrutura.EntityFramework
             modelBuilder.ApplyConfiguration(new TemaMapping());
             modelBuilder.ApplyConfiguration(new ComentarioMapping());
             modelBuilder.ApplyConfiguration(new MovieMapping());
+            modelBuilder.ApplyConfiguration(new MovieReviewMapping());
         }
 
         public DbSet<Narrativa> Narrativas { get; set; }
@@ -45,5 +46,6 @@ namespace Infraestrutura.EntityFramework
         public DbSet<ComentarioModel> Comentarios { get; set; }
         public DbSet<TemaModel> Temas { get; set; }
         public DbSet<MovieModel> Movies { get; set; }
+        public DbSet<MovieReviewModel> MovieReviews { get; set; }
     }
 }
